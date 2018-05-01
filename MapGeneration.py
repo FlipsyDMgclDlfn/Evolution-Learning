@@ -22,9 +22,9 @@ class Tile:
         else:
             self.food = 0
             
-    def draw(self, xsize, ysize):
+    def draw(self, display, xsize, ysize):
         if self.food != 0:
-            pygame.draw.rect( display, (0,200,0),( (self.x)*(xsize), (self.y)*(ysize), xsize, ysize ) )
+            pygame.draw.rect( display, (0,self.food*12,0),( (self.x)*(xsize), (self.y)*(ysize), xsize, ysize ) )
         else:
             pygame.draw.rect( display, (222,184,135),( (self.x)*(xsize), (self.y)*(ysize), xsize, ysize ) )
 
@@ -37,13 +37,13 @@ class Map:
             self.board += [[]]
             for j in range(width):
                 self.board[i] += [Tile(j,i)]
-    def draw(self):
+    def draw(self,diplay):
         for i in range(self.height):
             for j in range(self.width):
-                self.board[i][j].draw(WIDTH/self.width,HEIGHT/self.height)
+                self.board[i][j].draw(display, WIDTH/self.width, HEIGHT/self.height)
 
 ma = Map(120,120)
-ma.draw()
+ma.draw(display)
 
 carryOn = True
 while carryOn:
