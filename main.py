@@ -1,7 +1,7 @@
 import pygame
 import time
 from random import *
-import MapGeneration
+from MapGeneration import *
 
 pygame.init()
 WIDTH = 600
@@ -13,11 +13,15 @@ clock = pygame.time.Clock()
 ma = Map(120,120)
 ma.draw(display)
 
-carryOn = True
-while carryOn:
+run = True
+while run:
+    pygame.event.pump()
+    display.fill((255,255,255))
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
-              carryOn = False
-
+              run = False
+    ma = Map(120,120)
+    ma.draw(display)
+    
     pygame.display.update()
     clock.tick(30)

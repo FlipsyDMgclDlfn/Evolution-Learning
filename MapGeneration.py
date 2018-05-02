@@ -42,14 +42,3 @@ class Map:
             for j in range(self.width):
                 self.board[i][j].draw(display, WIDTH/self.width, HEIGHT/self.height)
 
-ma = Map(120,120)
-ma.draw(display)
-
-carryOn = True
-while carryOn:
-    for event in pygame.event.get():
-        if event.type == pygame.QUIT:
-              carryOn = False
-
-    pygame.display.update()
-    clock.tick(30)
