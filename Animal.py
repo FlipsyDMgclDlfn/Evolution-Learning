@@ -41,5 +41,13 @@ class Animal:
                 self.food += other.food + 1
                 other.food = 0
 
+    def clostestFood(self):
+        closestDistance = 999999
+        tile = self.species.board[0][0]
+        for i in range (len(self.species.board)):
+            for j in range (len(self.species.board[i])):
+                if self.species.board[i][j].food > 0:
+                    
+
     def draw(self,display,xsize,ysize):
         pygame.draw.rect( display, self.species.color,( (self.x)*(xsize), (self.y)*(ysize), xsize, ysize ) )
