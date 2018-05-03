@@ -1,4 +1,5 @@
 import pygame
+from random import *
 from Species import *
 
 class Animal:
@@ -41,13 +42,31 @@ class Animal:
                 self.food += other.food + 1
                 other.food = 0
 
-    def clostestFood(self):
-        closestDistance = 999999
-        tile = self.species.board[0][0]
-        for i in range (len(self.species.board)):
-            for j in range (len(self.species.board[i])):
+    def closestFood(self):
+        x = 0#randint(0,len(self.species.board)-1)
+        y = 0#randint(0,len(self.species.board[0])-1)
+        distance = ( ((abs(x-self.x))**2) + ((abs(y-self.y))**2) )**(1/2)
+        ymin = self.y - 5
+        ymax = self.y + 5
+        if ymin < 0:
+            ymin = 0
+        if ymax >= len(self.species.board):
+            ymax = len(self.species.board) - 1
+        xmin = self.y - 5
+        xmax = self.y + 5
+        if xmin < 0:
+            xmin = 0
+        if xmax >= len(self.species.board[0]):
+            xmax = len(self.species.board[0]) - 1
+        for i in range (ymin, ymax):
+            for j in range (xmin, xmax):
                 if self.species.board[i][j].food > 0:
-                    
+                    if (((abs(j-self.x))**2)+((abs(i-self.y))**2))**(1/2) <= distance:
+                        x = j
+                        y = i
+                        distance = (((abs(x-self.x))**2)+((abs(y-self.y))**2))**(1/2)
+        return self.species.board[y][x]
+                        
 
     def draw(self,display,xsize,ysize):
         pygame.draw.rect( display, self.species.color,( (self.x)*(xsize), (self.y)*(ysize), xsize, ysize ) )
