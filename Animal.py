@@ -14,9 +14,9 @@ class Animal:
         if self.energy >= self.species.eTE:
             self.energy -= 0#self.species.eTE
             if self.species.board[self.y][self.x].food > 0:
-                self.food += 1
-                self.energy += self.species.eFromV
-                self.species.board[self.y][self.x].food -= 1
+                self.food += self.species.board[self.y][self.x].food
+                self.energy += self.species.board[self.y][self.x].food * self.species.eFromV
+                self.species.board[self.y][self.x].food = 0
         if self.species.maxE < self.energy:
             self.energy = self.species.maxE
 
